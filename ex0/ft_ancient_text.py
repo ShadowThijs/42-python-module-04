@@ -1,21 +1,30 @@
-"""Text recovery from a file."""
+"""Ancient text recovery.
+
+Read and display a file's contents like the cat command.
+"""
+
+import sys
+from typing import IO
 
 
-file_name: str = "ancient_fragment.txt"
+def read_archive(filename: str) -> None:
+    """Open and display the contents of an archive file."""
+    print(f"Accessing file '{filename}'")
+    f: IO[str]
+    try:
+        f = open(filename, "r")
+    except OSError as e:
+        print(f"Error opening file '{filename}': {e}")
+        return
+    print("--")
+    print(f.read(), end="")
+    f.close()
+    print("--")
+    print(f"File '{filename}' closed.")
 
-print("=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===\n")
-print(f"Accessing Storage Vault: {file_name}")
 
-try:
-    with open(file_name, "r") as file:
-        data: str = file.read()
-        print("Connection established!\n")
-        print("Recovered data from storage vault: ")
-        print(data)
-        print()
-        print("Data recovery complete. Storage unit disconnected.")
-        file.close()
-except FileNotFoundError:
-    print(f"Connection failed: {file_name} not found")
-except PermissionError:
-    print(f"Connection failed: {file_name} needs elevated priveleges")
+if (len(sys.argv) != 2):
+    print(f"Usage: ft_ancient_text.py <file>")
+else:
+    print("=== Cyber Archives Recovery ===")
+    read_archive(sys.argv[1])
