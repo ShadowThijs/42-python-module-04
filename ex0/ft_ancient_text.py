@@ -24,7 +24,7 @@ def read_archive(filename: str) -> None:
 
 
 if (len(sys.argv) != 2):
-    print(f"Usage: ft_ancient_text.py <file>")
+    print("Usage: ft_ancient_text.py <file>")
 else:
     print("=== Cyber Archives Recovery ===")
     read_archive(sys.argv[1])
